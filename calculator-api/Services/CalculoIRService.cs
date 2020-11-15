@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using calculator_api.DTO;
 
 namespace calculator_api.Services
 {
@@ -21,9 +22,22 @@ namespace calculator_api.Services
             return await _calculoIRRepository.Get(id);           
         }        
 
-        public async Task<IEnumerable<CalculoIR>> GetAll()
+        public async Task<IEnumerable<CalculoDTO>> GetAll()
         {
-            return await _calculoIRRepository.GetAll();            
+            var calculosDTO = new List<CalculoDTO>();
+            var calculos = await _calculoIRRepository.GetAll();                        
+
+            foreach (var calculo in calculos)
+            {
+                calculosDTO.Add(new CalculoDTO
+                {
+                    ContribuinteId = calculo.Contribuinte.Id,
+                    Nome = calculo.Contribuinte.Nome,
+                    ImpostoCalculado = calculo.ImpostoDevido
+                });
+            }
+
+            return calculosDTO;
         }
 
         Task<CalculoIR> ICalculoIRService.Save(CalculoIR calculoIR)
@@ -31,7 +45,7 @@ namespace calculator_api.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<CalculoIR>> SaveAll(IList<CalculoIR> calculos)
+        public async Task<IEnumerable<CalculoIR>> SaveAll(IEnumerable<CalculoIR> calculos)
         {
             return await _calculoIRRepository.SaveAll(calculos);
         }

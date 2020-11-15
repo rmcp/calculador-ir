@@ -31,7 +31,7 @@ namespace calculator_api.Repository
 
         public async Task<IList<CalculoIR>> GetAll()
         {
-            return await _context.CalculoIRs.ToListAsync();
+            return await _context.CalculoIRs.Include(c => c.Contribuinte).ToListAsync();
         }
 
         public CalculoIR Save()
@@ -44,7 +44,7 @@ namespace calculator_api.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<CalculoIR>> SaveAll(IList<CalculoIR> calculos)
+        public async Task<IEnumerable<CalculoIR>> SaveAll(IEnumerable<CalculoIR> calculos)
         {
             _context.CalculoIRs.AddRange(calculos);           
             

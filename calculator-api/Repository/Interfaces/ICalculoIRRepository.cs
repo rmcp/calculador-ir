@@ -1,7 +1,6 @@
 ﻿using calculator_api.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace calculator_api.Repository
@@ -10,7 +9,7 @@ namespace calculator_api.Repository
     {
         CalculoIR Save();
 
-        Task<IEnumerable<CalculoIR>> SaveAll(IList<CalculoIR> calculos);
+        Task<IEnumerable<CalculoIR>> SaveAll(IEnumerable<CalculoIR> calculos);
 
         Task<CalculoIR> Get(Guid id);
 

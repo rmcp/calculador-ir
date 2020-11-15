@@ -20,6 +20,9 @@ namespace calculator_api
 {
     public class Startup
     {
+
+         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,13 +33,6 @@ namespace calculator_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<CalculatorContext>(opt =>
-            //   opt.UseInMemoryDatabase("CalculadorIR"));
-
-            services.AddDbContext<CalculatorContext>(opt =>
-               opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddControllers();
 
             services.AddScoped<ICalculoIRRepository, CalculoIRRepository>();
             services.AddScoped<ICalculadorIRService, CalculadorIRPessoaFisicaService>();
@@ -49,6 +45,24 @@ namespace calculator_api
 
             services.AddScoped<IContribuinteRepository, ContribuinteRepository>();
             services.AddScoped<IContribuinteService, ContribuinteService>();
+
+            //services.AddDbContext<CalculatorContext>(opt =>
+            //   opt.UseInMemoryDatabase("CalculadorIR"));
+
+            services.AddDbContext<CalculatorContext>(opt =>
+               opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                builder =>
+                                {
+                                    builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                                });
+            });
+           
+            services.AddControllers();                        
 
         }
 
@@ -64,7 +78,9 @@ namespace calculator_api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors(MyAllowSpecificOrigins);
+
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -34,6 +34,8 @@ namespace calculator_api.Services
                 var aliquota = _aliquotaService.Get(dado.SalarioMinimo, rendaLiquida).Result;
                 var impostoDevido = rendaLiquida * aliquota.Porcentagem / 100;
 
+                if (aliquota == null) throw new ArgumentException("Aliquota não encontrada. Verifique os parâmetros passados");
+
                 var contribuinte = new Contribuinte
                 {
                     Nome = dado.Nome,
@@ -41,7 +43,6 @@ namespace calculator_api.Services
                     Renda = dado.RendaBruta,
                     Dependentes = dado.Dependentes
                 };
-
 
                 contribuinte = await _contribuinteService.Save(contribuinte);
 
@@ -59,9 +60,7 @@ namespace calculator_api.Services
 
             }
 
-            await _calculoIRService.SaveAll(novosCalculos);
-
-            //return _calculoIRRepository.GetAll().Result.OrderBy(c => c.Contribuinte.Nome).ThenBy(c => c.ImpostoDevido).ToList();
+            await _calculoIRService.SaveAll(novosCalculos);            
 
             var novosCalculosDTO = new List<CalculoDTO>();
 
@@ -75,7 +74,7 @@ namespace calculator_api.Services
                 });
             }
 
-            return novosCalculosDTO;
+            return novosCalculosDTO.OrderBy(c => c.Nome).ThenBy(c => c.ImpostoCalculado);
             
         }
 

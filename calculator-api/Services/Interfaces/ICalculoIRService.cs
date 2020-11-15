@@ -1,3 +1,4 @@
+using calculator_api.DTO;
 using calculator_api.Models;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace calculator_api.Services
     {        
         Task<CalculoIR> Get(Guid id);        
 
-        Task<IEnumerable<CalculoIR>> GetAll();
+        Task<IEnumerable<CalculoDTO>> GetAll();
 
         Task<CalculoIR> Save(CalculoIR calculoIR);
         
-        Task<IEnumerable<CalculoIR>> SaveAll(IList<CalculoIR> calculos);
+        Task<IEnumerable<CalculoIR>> SaveAll(IEnumerable<CalculoIR> calculos);
 
     }
 }

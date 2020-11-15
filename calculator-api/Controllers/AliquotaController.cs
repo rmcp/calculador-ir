@@ -1,13 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using calculator_api.Models;
-using calculator_api.Repository;
-using calculator_api.Data;
 using calculator_api.Services;
 
 namespace calculator_api.Controllers

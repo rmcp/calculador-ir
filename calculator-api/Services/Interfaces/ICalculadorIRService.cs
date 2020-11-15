@@ -1,5 +1,4 @@
 using calculator_api.DTO;
-using calculator_api.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

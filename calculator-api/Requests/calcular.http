@@ -6,14 +6,14 @@ content-type: application/json
     {        
         "Nome": "Teste Alterado",
         "Cpf": "11111111111",        
-        "Dependentes" : 2,
-        "RendaBruta" : 2000,
+        "Dependentes" : 10,
+        "RendaBruta" : 8000,
         "SalarioMinimo" : 1045.00
     },
     {        
         "Nome": "Teste2",
         "Cpf": "22222222222",        
-        "Dependentes" : 3,
+        "Dependentes" : 5,
         "RendaBruta" : 10000,
         "SalarioMinimo" : 1045.00
     }
