@@ -1,0 +1,5 @@
+#
+GET http://localhost:5000/api/Contribuinte/e291141d-d0d4-493e-27ec-08d888f0b8eb HTTP/1.1
+content-type: application/json
+
+

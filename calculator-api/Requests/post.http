@@ -1,0 +1,17 @@
+#
+POST http://localhost:5000/api/Contribuinte HTTP/1.1
+content-type: application/json
+
+{    
+    "Nome": "Teste",
+    "Cpf": "11111111111",    
+    "Renda": 10000,
+    "Dependentes": [
+        {"Nome": "Dependente 1",
+        "Cpf": "1234567"},
+        {"Nome": "Dependente 2",
+        "Cpf": "1234567"}
+    ]
+}
+
+

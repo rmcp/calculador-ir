@@ -1,0 +1,22 @@
+#
+POST http://localhost:5000/api/CalculadorIR HTTP/1.1
+content-type: application/json
+
+[
+    {        
+        "Nome": "Teste Alterado",
+        "Cpf": "11111111111",        
+        "Dependentes" : 2,
+        "RendaBruta" : 2000,
+        "SalarioMinimo" : 1045.00
+    },
+    {        
+        "Nome": "Teste2",
+        "Cpf": "22222222222",        
+        "Dependentes" : 3,
+        "RendaBruta" : 10000,
+        "SalarioMinimo" : 1045.00
+    }
+]
+
+
