@@ -31,10 +31,11 @@ namespace calculator_api.Services
             {
                                 
                 decimal rendaLiquida = dado.RendaBruta - dado.Dependentes * (dado.SalarioMinimo * 0.05m);
-                var aliquota = _aliquotaService.Get(dado.SalarioMinimo, rendaLiquida).Result;
-                var impostoDevido = rendaLiquida * aliquota.Porcentagem / 100;
+                var aliquota = _aliquotaService.Get(dado.SalarioMinimo, rendaLiquida).Result;                
 
-                if (aliquota == null) throw new ArgumentException("Aliquota não encontrada. Verifique os parâmetros passados");
+                if (aliquota == null) throw new ArgumentException("Aliquota nao encontrada. Verifique os parametros passados");
+
+                var impostoDevido = rendaLiquida * aliquota.Porcentagem / 100;
 
                 var contribuinte = new Contribuinte
                 {
