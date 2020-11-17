@@ -62,7 +62,9 @@ namespace calculator_api
                                 });
             });
            
-            services.AddControllers();                        
+            services.AddControllers();   
+
+            services.AddSwaggerGen();                     
 
         }
 
@@ -75,6 +77,16 @@ namespace calculator_api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Calculador de IR API V1");
+                c.RoutePrefix = "api";
+            });
 
             app.UseRouting();
 
